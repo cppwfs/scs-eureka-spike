@@ -1,6 +1,7 @@
 package org;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.cloud.client.ServiceInstance;
@@ -18,10 +19,16 @@ public class Application {
 	@Autowired
 	private DiscoveryClient discoveryClient;
 	
+	@Value("${spring.application.name}")
+	String eurekaName;
+	
+	
   @RequestMapping("/")
   public String home() {
+	  
+	  String hostName;
 	  String result = "";
-	  for (ServiceInstance instance : discoveryClient.getInstances("niiiiice")) {
+	  for (ServiceInstance instance : discoveryClient.getInstances(eurekaName)) {
 		  //ServiceInstance instance = discoveryClient.getLocalServiceInstance();
 		  String host = instance.getHost();
 		  String id = instance.getServiceId();

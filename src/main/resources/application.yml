@@ -5,6 +5,7 @@ eureka:
   instance:
     metadataMap:
       instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+      foobar: iamniceguy
   client:
     serviceUrl:
       defaultZone: ${vcap.services.eureka-service.credentials.uri:http://localhost:9395}/eureka/
